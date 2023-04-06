@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 import {
   sampleRUM,
   buildBlock,
@@ -104,7 +105,7 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  if(!window.__STORYBOOK_PREVIEW__) {
+  if (!window.__STORYBOOK_PREVIEW__) {
     loadHeader(doc.querySelector('header'));
     loadFooter(doc.querySelector('footer'));
   }
@@ -132,6 +133,6 @@ export async function loadPage() {
   loadDelayed();
 }
 
-if(!window.__STORYBOOK_PREVIEW__) {
+if (!window.__STORYBOOK_PREVIEW__) {
   loadPage();
 }
