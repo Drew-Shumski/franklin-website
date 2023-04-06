@@ -96,14 +96,18 @@ export function addFavIcon(href) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
-  await loadBlocks(main);
+  if (!window.__STORYBOOK_PREVIEW__) {
+    await loadBlocks(main);
+  }
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  if(!window.__STORYBOOK_PREVIEW__) {
+    loadHeader(doc.querySelector('header'));
+    loadFooter(doc.querySelector('footer'));
+  }
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
@@ -128,4 +132,6 @@ async function loadPage() {
   loadDelayed();
 }
 
-loadPage();
+if(!window.__STORYBOOK_PREVIEW__) {
+  loadPage();
+}
